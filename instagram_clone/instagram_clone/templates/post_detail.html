@@ -1,66 +1,38 @@
 {% extends 'base.html' %}
 
 {% load static %}
-        
-{% block banner %}
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-    </div>
-    <div class="parallax">
-      {% if article.picture %}
-        <img src="{{ article.picture.url }}" alt="Unsplashed background img 1">
-      {% else %}
-        <img src="{% static 'img/default-thumbnail.jpg' %}">
-      {% endif %}
-    </div>
-  </div>
-
-<form id="favoriteform" method="POST" action="">
-  {% csrf_token %}
-  <a href="javascript:void()" onclick="document.getElementById('favoriteform').submit();" class="btn-floating btn-large {% if favorited is True %} grey {% else %}red{% endif %} right tooltipped" data-position="left" data-tooltip="{% if favorited is True %} Remove from favorites{% else %}Add to Favorites{% endif %}">
-    <i class="large material-icons">favorite</i>
-  </a>
-</form>
-
-{% endblock %}
-
 
 {% block content %}
-    <div class="row">
-      <div class="col s12 m12">
-        <div class="card">
-          <ul class="collection">
-            <li class="collection-item avatar">
-              <i class="material-icons circle">account_circle</i>
-              <span style="font-size: 20px; font-weight: bold;" class="title">Category:</span>
-              <span style="font-size: 18px;" class="title">{{ article.category }}</span>
-              <span class="title secondary-content">{{ article.publication_date | date:"d - M - Y" }}</span>
-              <p>{{ article.author }}</p>
-            </li>
-          </ul>
+<div class="columns is-mobile is-centered">
+  <div class="column">
 
-          <div class="card-panel">
-            
-            <h2 class="header">{{ article.title }}</h2>
-
-            {{ article.content | safe }}
-
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="{{ post.picture.url }}" alt="Placeholder image">      
+          </figure>
+        </div>
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">          </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4">John Smith</p>
+              <p class="subtitle is-6">@{{ post.user.username }}</p>
+            </div>
           </div>
 
-          <div class="divider"></div>
-
-          <div class="card-action">
-            <span style="font-size: 20px;" class="title">Tags: </span>
-            
-            {% for tag in article.tags.all %}
-                <div class="chip"><a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a></div>
-            {% endfor %}
-          </div>
+          <div class = "content">
+            {{ post.caption }}
+            <p>{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>{% endfor %}</p>
+            <br>
+          <time datetime="2016-1-1">{{ post.posted }}</time>
         </div>
       </div>
     </div>
-            
-
+    <br>
+    </div>
+    </div>
 {% endblock %}
-
-

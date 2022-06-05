@@ -16,7 +16,11 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
+          {% if post_item.user.profile.picture %}
           <p class="title is-4">John Smith</p>
+          {% else %}
+          <p class="title is-4">John Smith</p>
+          {% endif %}
           <p class="subtitle is-6">@{{ post_item.user.username }}</p>
           {{ post_item.caption }}
           <p>{% for tag in post_item.tags.all %}<a href="{{ tag.get_absolute_url }}">{{ tag }}</a>{% endfor %}</p>

@@ -30,7 +30,7 @@
         </div>
 
     <div class="media-right">
-      <a href="#"><i class="material-icons has-text-danger">favorite</i></a>
+      <a href="{% url 'postlike' post_item.id %}"><i class="material-icons has-text-danger">favorite</i></a>
       <p>{{ post_item.likes }} Likes</p>
     </div>
   </div>

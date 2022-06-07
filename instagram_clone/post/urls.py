@@ -7,5 +7,5 @@ urlpatterns =[
     path('', login_required(IndexView.as_view()), name='index'),
     path('newpost/', NewPost, name='newpost'),
     path('<int:pk>',login_required(PostDetailsView.as_view()), name='postdetails'),
-    path('<uuid:post_id>/like', like, name='postlike'),
+    path('<int:post_id>/like', like, name='postlike'),
 ]

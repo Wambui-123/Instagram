@@ -119,22 +119,23 @@ def tags(request, tag_slug):
 
 @login_required
 def like(request, post_id):
-	user = request.user
-	post = Post.objects.get(id=post_id)
-	current_likes = post.likes
-	liked = Likes.objects.filter(user=user, post=post).count()
-
-	if not liked:
-		like = Likes.objects.create(user=user, post=post)
-		#like.save()
-		current_likes = current_likes + 1
-
-	else:
-		Likes.objects.filter(user=user, post=post).delete()
-		current_likes = current_likes - 1
-
-	post.likes = current_likes
+	# user = request.user
+	post = get_object_or_404(Post, pk=post_id)
+	post.likes += 1
 	post.save()
+	# liked = Likes.objects.filter(user=user, post=post).count()
+
+	# if not user_likes:
+	# 	# like = Likes.objects.create(user=user, post=post)
+	# 	#like.save()
+	# 	current_likes = current_likes + 1
+
+	# else:
+	# 	user_likes.delete()
+	# 	current_likes = current_likes - 1
+
+	# post.likes = current_likes
+	# post.save()
 
 	return HttpResponseRedirect(reverse('postdetails', args=[post_id]))
 

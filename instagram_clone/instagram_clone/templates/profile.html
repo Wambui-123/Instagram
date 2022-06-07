@@ -9,9 +9,9 @@
   <div class="media-left">
       <figure class="image is-256x256">
         {% if profile.picture %}
-          <img class="is-rounded" src="{{profile.picture.url}}" alt="profile">
-        {% else %}  
-        <img class="is-rounded" src="{% if profile.picture %}{{ profile.picture.url }}{% else %} https://bulma.io/images/placeholders/256x256.png{% endif %}">
+          <img class="is-rounded img" src="{{ profile.picture.url }}">
+        {% else %}
+          <img class="is-rounded img" src="https://bulma.io/images/placeholders/256x256.png">
         {% endif %}
       </figure>
   </div>
@@ -22,20 +22,20 @@
       <h1 style="font-weight: bold;" class="title is-1">{% if profile.first_name %}{{ profile.first_name }} {{ profile.last_name }} {% endif %}</h1>
       <h2 class="subtitle is-3">@{{ profile.user }}</h2>
 
-    {% if user.is_authenticated and user != profile.user %}
+    {% comment %} {% if user.is_authenticated and user != profile.user %}
       <div class="media-right">
-        {% if follow_status == True %}
+        {% if follow_status == True %} {% endcomment %}
           <a href="{% url 'follow' profile.user 0 %}" class="button is-danger">Unfollow</a>
-        {% else %}
+        {% comment %} {% else %} {% endcomment %}
           <a href="{% url 'follow' profile.user 1 %}" class="button is-success">Follow</a>
-        {% endif  %}
+        {% comment %} {% endif  %}
       </div>
-    {% endif %} 
+    {% endif %}
 
-     </div> 
+    </div> {% endcomment %}
 
 
-  <nav class="level is-mobile">
+     <nav class="level is-mobile">
   <div class="level-item has-text-centered">
     <div>
       <p class="heading">Posts</p>
@@ -44,8 +44,8 @@
   </div>
   <div class="level-item has-text-centered">
     <div>
-      <p class="heading">Following</p>
-      <p class="title">{{ following_count }}</p>
+      {% comment %} <p class="heading">Following</p> {% endcomment %}
+      {% comment %} <p class="title">{{ following_count }}</p> {% endcomment %}
     </div>
   </div>
   <div class="level-item has-text-centered">
@@ -58,7 +58,9 @@
 
 <p class="subtitle is-5">{% if profile.profile_info %}{{ profile.profile_info }}{% endif %}</p>
 
+{% if user.is_authenticated and user == profile.user %}
   <a href="{% url 'edit-profile' %}" class="button">Edit profile</a>
+{% endif %}
 
  </div>
 
@@ -67,6 +69,60 @@
 
 </div>
 </div>
+
+
+
+    </div>
+  </section>
+
+
+
+  <section class="section">
+    <div class="container">
+
+  <div class="tabs is-centered">
+  <ul>
+    <li class="{% if url_name == 'profile' %}is-active{% endif %}">
+      <a href="{% url 'profile' profile.user %}"><i class="material-icons">dashboard</i>Posts</a>
+    </li>
+
+    {% comment %} <li class="{% if url_name == 'profilefavorites' %}is-active{% endif %}">
+      <a href="{% url 'profilefavorites' profile.user %}"><i class="material-icons">save_alt</i>Saved</a>
+    </li>  {% endcomment %}
+  </ul>
+</div>
+
+
+    <div class="columns is-mobile is-multiline is-centered">
+      
+  {% for post in posts %}
+    <div class="column is-one-quarter">
+      <div class="box">
+
+  {% comment %} {% if post.content.first.file.name|slice:"-3:" == 'jpg' or post_item.content.first.file.name|slice:"-3:" == 'png' %} {% endcomment %}
+    <figure class="image is-4by3">
+      {% comment %} <a href="{{ post.get_absolute_url }}"> {% endcomment %}
+        <img src="{{ post.picture.url }}" alt="Placeholder image">
+        {% comment %} <img src="{{ profile.picture }}" alt="Placeholder image"> {% endcomment %}
+
+      </a>
+    </figure>
+ 
+    </div>
+      </div>
+    {% empty %}
+      <br>
+      <h3 class="title is-3">You do not have any post!</h3>
+    {% endfor %}
+
+
+
+      </div>
+
+</div>
+</div>
+
+
 
     </div>
   </section>

@@ -10,8 +10,7 @@ from post.models import Post, Follow, Stream
 from django.db import transaction
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
-from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, resolve
 
 from django.core.paginator import Paginator
 
@@ -19,18 +18,24 @@ from django.core.paginator import Paginator
 def UserProfile(request, username):
 	user = get_object_or_404(User, username=username)
 	profile = Profile.objects.get(user=user)
-	# articles = profile.favorites.all()
+	url_name = resolve(request.path).url_name
+ 
+	if url_name == 'profile':
+			posts = Post.objects.filter(user=user).order_by('-posted')
+	else: 
+			posts = profile.favorites.all()
 
-	#Pagination
-	# paginator = Paginator(articles, 6)
-	# page_number = request.GET.get('page')
-	# articles_paginator = paginator.get_page(page_number)
+	# Pagination
+	paginator = Paginator(posts, 8)
+	page_number = request.GET.get('page')
+	post_paginator = paginator.get_page(page_number)
 
 	template = loader.get_template('profile.html')
 
 	context = {
-		# 'articles': articles_paginator,
+		'posts': post_paginator,
 		'profile':profile,
+		'url_name': url_name
 	}
 
 	return HttpResponse(template.render(context, request))
@@ -44,7 +49,7 @@ def Signup(request):
 			email = form.cleaned_data.get('email')
 			password = form.cleaned_data.get('password')
 			User.objects.create_user(username=username, email=email, password=password)
-			return redirect('edit-profile')
+			return redirect (reverse("index"))
 	else:
 		form = SignupForm()
 	
@@ -115,12 +120,11 @@ def follow(request, username, option):
 			f.delete()
 			Stream.objects.filter(following=following, user=request.user).all().delete()
 		else:
-			 posts = Post.objects.all().filter(user=following)[:25]
-
-			 with transaction.atomic():
+			posts = Post.objects.all().filter(user=following)[:25]
+			with transaction.atomic():
 			 	for post in posts:
-			 		stream = Stream(post=post, user=request.user, date=post.posted, following=following)
-			 		stream.save()
+						stream = Stream(post=post, user=request.user, date=post.posted, following=following)
+						stream.save()
 
 		return HttpResponseRedirect(reverse('profile', args=[username]))
 	except User.DoesNotExist:

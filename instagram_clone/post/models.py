@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from post.models import Post
 
 from django.db.models.signals import post_save
 from django.utils.text import slugify
@@ -33,7 +32,7 @@ class Tag(models.Model):
         return super().save(*args, **kwargs)
 
 class Post(models.Model):  
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     picture = models.ImageField(upload_to=user_directory_path, verbose_name="Picture", null=False)
     caption = models.TextField(max_length=1500, verbose_name="Caption")
     posted = models.DateTimeField(auto_now_add=True)

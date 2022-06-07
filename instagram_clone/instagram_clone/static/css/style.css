@@ -1,6 +1,9 @@
 body{
-    background-color: red;
-}
+    /* background: url("img/logo.png"); */
+    background-image: url("img/logo.png") !important;
+    /* background-color: #FF2768; */ 
+     /* background-image: -webkit-linear-gradient(left, rgb(230, 55, 160), rgb(88, 189, 58),  rgb(234, 215, 229)); */
+    } 
 .img{
     width: 400px !important;
     height: 400px !important; 

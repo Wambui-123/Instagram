@@ -5,7 +5,8 @@ from django.template import loader
 from post.models import Stream, Post, Tag, Likes
 from post.forms import NewPostForm
 from django.views import generic
-
+from comment.forms import CommentForm
+from comment.models import Comment
 
 
 from django.contrib.auth.decorators import login_required
@@ -25,6 +26,10 @@ class IndexView(generic.ListView):
 class PostDetailsView(generic.DetailView):
     model = Post
     template_name = "post_detail.html"
+    def get_queryset(self):
+      return Comment.objects.order_by("date")
+    # form = CommentForm()
+    # comment = form.save(commit=False)
     # post = get_object_or_404(Post, pk)
 
 
@@ -123,19 +128,6 @@ def like(request, post_id):
 	post = get_object_or_404(Post, pk=post_id)
 	post.likes += 1
 	post.save()
-	# liked = Likes.objects.filter(user=user, post=post).count()
-
-	# if not user_likes:
-	# 	# like = Likes.objects.create(user=user, post=post)
-	# 	#like.save()
-	# 	current_likes = current_likes + 1
-
-	# else:
-	# 	user_likes.delete()
-	# 	current_likes = current_likes - 1
-
-	# post.likes = current_likes
-	# post.save()
 
 	return HttpResponseRedirect(reverse('postdetails', args=[post_id]))
 

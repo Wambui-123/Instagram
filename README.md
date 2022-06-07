@@ -13,7 +13,7 @@ The user would like to.... :
 +  Add photos,like photos,follow other users.
 +  Logout.
 
-## [Demo]("") click to view
+## Live server ""
 
 
 ## Installation / Setup instruction

@@ -31,10 +31,10 @@
                 <p class="title is-4">Username: {{ post.user.username }}</p>
               {% endif %}
 
-              {{ post.caption }}
-              <p>{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">Tag: {{ tag }}</a>{% endfor %}</p>
+              <p class="sub-title">{{ post.caption }}</p>
+              <p class="sub-title">{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">Tag: {{ tag }}</a>{% endfor %}</p>
               <br>
-              <strong><small><time datetime="2016-1-1">{{ post.posted }}</time></small></strong>
+              <strong class="sub-title"><small><time datetime="2016-1-1">{{ post.posted }}</time></small></strong>
             </div>
 
 
@@ -82,7 +82,7 @@
           <div class="media-content">
             <div class="field">
               <p class="control">
-                <form action="{% url 'postdetails' %}" method="post">
+                <form action="" method="post">
                   {% csrf_token %}
                   {{comment}}
                   <button class="button" type="submit">Post comment</button>

@@ -25,14 +25,12 @@ class IndexView(generic.ListView):
 
 class PostDetailsView(generic.DetailView):
     model = Post
-    # model: Comment
+    
     template_name = "post_detail.html"
-    # def get_queryset(self):
-    #   return Comment.objects.order_by("date")
-    # form = CommentForm()
-    # comment = form.save(commit=False)
-    # post = get_object_or_404(Post, pk)
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["comment"] = CommentForm(self.request.POST or None)
+        return context
 
 # Create your views here.
 # @login_required

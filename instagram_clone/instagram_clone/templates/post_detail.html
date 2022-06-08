@@ -82,12 +82,17 @@
           <div class="media-content">
             <div class="field">
               <p class="control">
-                <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                <form action="{% url 'postdetails' %}" method="post">
+                  {% csrf_token %}
+                  {{comment}}
+                  <button class="button" type="submit">Post comment</button>
+                </form>
+                {% comment %} <label>{{comment}}</label>
+                <textarea class="textarea" placeholder="Add a comment..."></textarea> {% endcomment %}
               </p>
             </div>
             <div class="field">
               <p class="control">
-                <button class="button">Post comment</button>
               </p>
             </div>
           </div>

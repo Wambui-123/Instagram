@@ -29,18 +29,16 @@
               <i class="material-icons" style="font-size:30px;">home</i>
             </a>
 
-            <a href="{% url 'profile' request.user %}" class="navbar-item">
-              <i class="material-icons" style="font-size:30px;">account_circle</i> 
-              <strong>{{ request.user }}</strong>
-            </a>
-
-            
-
             <a href="{% url 'newpost' %}" class="navbar-item">
               <i class="material-icons" style="font-size:30px;">add_circle</i>
           </a>
-          </div>
-      
+         
+          <a href="{% url 'profile' request.user %}" class="navbar-item">
+            <i class="material-icons" style="font-size:30px;">account_circle</i> 
+            <strong>{{ request.user }}</strong>
+          </a>
+        </div>
+        
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">

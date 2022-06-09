@@ -18,6 +18,7 @@ A Django framework { python } application that enables users to post pictures an
 
 ## Live Site link
 You can view the live application by following this [link]("").
+[Demo](https://jullzigclone.herokuapp.com/)] click to view
 
 
 ## Description

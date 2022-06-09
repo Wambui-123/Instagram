@@ -17,7 +17,7 @@ A Django framework { python } application that enables users to post pictures an
 [Yvonne Muthui](https://github.com/wambui-123)
 
 ## Live Site link
-##  Demo (https://jullzigclone.herokuapp.com/)] click to view
+## [Demo](https://jullzigclone.herokuapp.com/) click to view
 
 
 ## Description

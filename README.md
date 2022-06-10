@@ -4,7 +4,7 @@
 ~ Yvonne Muthui
 ## Description
 
-A Django framework { python } application that enables users to post pictures and update their profile and view other people posts.
+A Django framework Python application that enables users to post pictures and update their profile and view other people posts.
 
 ## User Story
 * Sign in to the application to start using.
@@ -21,7 +21,7 @@ A Django framework { python } application that enables users to post pictures an
 
 
 ## Description
-A photo gallery web application made using Django.
+A web application just like instagram that lets you upload posts and edit your own profile pictures made using Django.
 
 ## Technologies Used
 * Python 3.7.4

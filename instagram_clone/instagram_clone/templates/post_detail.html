@@ -32,7 +32,7 @@
               {% endif %}
 
               <p class="sub-title">{{ post.caption }}</p>
-              <p class="sub-title">{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}">Tag: {{ tag }}</a>{% endfor %}</p>
+              <p class="sub-title">{% for tag in post.tags.all %}<a href="{{ tag.get_absolute_url }}"> Tag: {{ tag }}</a>{% endfor %}</p>
               <br>
               <strong class="sub-title"><small><time datetime="2016-1-1">{{ post.posted }}</time></small></strong>
             </div>

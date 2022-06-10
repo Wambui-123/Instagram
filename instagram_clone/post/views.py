@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
+from django.views.generic import ListView, DetailView, CreateView
 
 from post.models import Stream, Post, Tag, Likes
 from post.forms import NewPostForm
@@ -28,6 +29,7 @@ class PostDetailsView(generic.DetailView):
     
     template_name = "post_detail.html"
     def get_context_data(self, **kwargs):
+        context_object_name = "post_items"
         context = super().get_context_data(**kwargs)
         context["comment"] = CommentForm(self.request.POST or None)
         return context

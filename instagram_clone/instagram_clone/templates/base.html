@@ -12,8 +12,12 @@
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://about.instagram.com/">
+          {% comment %} <a class="navbar-item" href="https://about.instagram.com/">
             <img src="{% static 'img/logo.webp' %}" width="40" height="64">
+          </a> {% endcomment %}
+
+          <a class="navbar-item" href="https://about.instagram.com/">
+            <img src="{% static 'img/Instagram_logo.svg.png' %}" width="100px" height="100px">
           </a>
       
           <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -25,6 +29,7 @@
       
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
+
             <a href="{% url 'index' %}" class="navbar-item">
               <i class="material-icons" style="font-size:30px;">home</i>
             </a>
